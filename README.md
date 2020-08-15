@@ -1,2 +1,27 @@
-# Reactive-Forms
- Utilizaremos formularios reactivos ya que nos permiten tener mayor control y orden desde el controlador y no desde la vista.  Para usar formularios reactivos, importe ReactiveFormsModule desde @angular/forms y agréguelo al array de imports en el módulo.  import { ReactiveFormsModule } from '@angular/forms';  @NgModule({   imports: [     // other imports ...     ReactiveFormsModule   ], }) export class ExampleModule { } La clase FormControl es el bloque de construcción básico cuando se usan formularios reactivos. Al crearlo obtienes acceso inmediato para escuchar, actualizar y validar el estado de la entrada del formulario.  export class ExampleComponent {   name = new FormControl(''); } Una vez creado el FormControl, debe asociarlo a un elemento del formulario en el HTML. A partir de esto se comunican entre sí: la vista refleja los cambios en el modelo y el modelo refleja los cambios en la vista.  <label>   Name:   <input type="text" [formControl]="name"> </label>  Mostrando El Valor De Un FormControl Podemos mostar el valor de estas formas:  A través del valueChanges, nos devuelve un observable. this.myFormExample.valueChanges.subscribe(val => {     // ... val }); A través de la propiedad value, que nos devuelve una instantánea del valor actual. <p> Value: {{ name.value }} </p>  Validadores Añadiremos validadores como segundo elemento en la matriz del FormControl. Para más información: https://angular.io/guide/form-validation  exampleForm = this.fb.group({   firstName: ['', Validators.required],   lastName: ['', Validators.required],   address: this.fb.group({     street: [''],     city: [''],     state: [''],     zip: ['']   }), });  Remplazando El Valor De Un FormControl Tenemos la posibilidad de remplazar el valor de un FormControl sin la interacción del usuario, por ejemplo al recuperar los datos de una API, usamos el método setValue() para actualizar el FormControl a su nuevo valor.  this.name.setValue('Nombre');  FormGroup, Agrupando FormControls Así como una instancia de un FormControl nos da control sobre un solo campo de entrada, un FormGroup nos rastrea el estado de un grupo de instancias de FormControls.  export class ProfileEditorComponent {   exampleForm = new FormGroup({     firstName: new FormControl(''),     lastName: new FormControl(''),   }); }  Asociando Un FormGroup A La Vista El FormGroup estará vinculado al elemento <form>, creando una capa de comunicación entre el modelo y el formulario que contriene las entradas. formControlName vincula cada entrada individual al FormControl definido en el FormGroup.  <form [formGroup]="exampleForm">   <label>     First Name:     <input type="text" formControlName="firstName">   </label>   <label>     Last Name:     <input type="text" formControlName="lastName">   </label> </form>  Diferencia Entre El Uso De FormBuilder Y La Creación Manual De Las Instancias. La creación manual de FormControls puede volverse repetitiva cuando se trata de múltiples formularios. Por ese motivo utilizaremos el servicio FormBuilder, que nos proporciona métodos convenientes para generar FormControls.  Manualmente  exampleForm = new FormGroup({   firstName: new FormControl(''),   lastName: new FormControl(''),   address: new FormGroup({     street: new FormControl(''),     city: new FormControl(''),     state: new FormControl(''),     zip: new FormControl('')   }) }); Con FormBuilder  exampleForm = this.fb.group({   firstName: [''],   lastName: [''],   address: this.fb.group({     street: [''],     city: [''],     state: [''],     zip: ['']   }), });  Utilizando NgSubmit Utilizamos el evento (ngSubmit) en la etiqueta del formulario <form (ngSubmit)="onSubmit()"> para enviar los datos de nuestro formulario enlazandolos con un botón de tipo submit, que podremos deshabilitar en caso de que nuestro formulario no sea válido.  <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+# REACTIVEFORMS
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.6.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

@@ -1,0 +1,10 @@
+<label for="">Email</label>
+<input type="text" [formControl]="emailCtrl">
+<p *ngIf="emailCtrl.errors && emailCtrl.dirty">
+    <!--El hasError cuando se pasa por required muestra el mensaje este campo es requerido, pero cuando se empieza a escribir
+    se quita y el dirty es para cuando ya hayas escribido y decidas borrar te va a mostrar este mensaje para recordar-->
+    <small *ngIf="emailCtrl.hasError('required')">Este campo es requerido</small>
+    <small *ngIf="emailCtrl.hasError('maxlength')">Caracteres sobre pasados</small>
+    <small *ngIf="emailCtrl.hasError('minlength')">Debe tener un mínimo de caracteres</small>
+</p>
+<button [disabled]="emailCtrl.invalid" (click)="getEmail($event)">Enviar</button>
