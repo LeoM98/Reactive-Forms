@@ -7,6 +7,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Step by step
+https://docs.google.com/document/d/126c2lOKNzkMpL2GBNrC4s3Cp4WrLJG5edJXfR90vLz0/edit?usp=sharing
+Este documento es para que se guíen del paso a paso de como se hicieron los formularios reactivos, está explicado a mi manera pero es tomado por la documentación oficial de angular
 
 ## Code scaffolding
 
